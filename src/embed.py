@@ -19,9 +19,10 @@ conn = psycopg2.connect(
 )
 cursor = conn.cursor()
 
+cursor.execute("CREATE EXTENSION IF NOT EXISTS vector")
+conn.commit()
 register_vector(conn)
 
-cursor.execute("CREATE EXTENSION IF NOT EXISTS vector")
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS documents (
         id SERIAL PRIMARY KEY,
